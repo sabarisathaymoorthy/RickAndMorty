@@ -13,7 +13,6 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as DemoIndexRouteImport } from './routes/demo/index'
 import { Route as CharacterListIndexRouteImport } from './routes/characterList/index'
 import { Route as DemoDemoIdRouteImport } from './routes/demo/$demoId'
-import { Route as CharacterListPageIdRouteImport } from './routes/characterList/$pageId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -35,22 +34,15 @@ const DemoDemoIdRoute = DemoDemoIdRouteImport.update({
   path: '/demo/$demoId',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CharacterListPageIdRoute = CharacterListPageIdRouteImport.update({
-  id: '/characterList/$pageId',
-  path: '/characterList/$pageId',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/characterList/$pageId': typeof CharacterListPageIdRoute
   '/demo/$demoId': typeof DemoDemoIdRoute
   '/characterList': typeof CharacterListIndexRoute
   '/demo': typeof DemoIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/characterList/$pageId': typeof CharacterListPageIdRoute
   '/demo/$demoId': typeof DemoDemoIdRoute
   '/characterList': typeof CharacterListIndexRoute
   '/demo': typeof DemoIndexRoute
@@ -58,38 +50,20 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/characterList/$pageId': typeof CharacterListPageIdRoute
   '/demo/$demoId': typeof DemoDemoIdRoute
   '/characterList/': typeof CharacterListIndexRoute
   '/demo/': typeof DemoIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/'
-    | '/characterList/$pageId'
-    | '/demo/$demoId'
-    | '/characterList'
-    | '/demo'
+  fullPaths: '/' | '/demo/$demoId' | '/characterList' | '/demo'
   fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/'
-    | '/characterList/$pageId'
-    | '/demo/$demoId'
-    | '/characterList'
-    | '/demo'
-  id:
-    | '__root__'
-    | '/'
-    | '/characterList/$pageId'
-    | '/demo/$demoId'
-    | '/characterList/'
-    | '/demo/'
+  to: '/' | '/demo/$demoId' | '/characterList' | '/demo'
+  id: '__root__' | '/' | '/demo/$demoId' | '/characterList/' | '/demo/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  CharacterListPageIdRoute: typeof CharacterListPageIdRoute
   DemoDemoIdRoute: typeof DemoDemoIdRoute
   CharacterListIndexRoute: typeof CharacterListIndexRoute
   DemoIndexRoute: typeof DemoIndexRoute
@@ -125,19 +99,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DemoDemoIdRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/characterList/$pageId': {
-      id: '/characterList/$pageId'
-      path: '/characterList/$pageId'
-      fullPath: '/characterList/$pageId'
-      preLoaderRoute: typeof CharacterListPageIdRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  CharacterListPageIdRoute: CharacterListPageIdRoute,
   DemoDemoIdRoute: DemoDemoIdRoute,
   CharacterListIndexRoute: CharacterListIndexRoute,
   DemoIndexRoute: DemoIndexRoute,
