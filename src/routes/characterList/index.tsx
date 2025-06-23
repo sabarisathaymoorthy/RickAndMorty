@@ -9,13 +9,13 @@ import {
 import { z } from "zod";
 
 export const Route = createFileRoute("/characterList/")({
-  component: RouteComponent,
+  component: characterList,
   validateSearch: z.object({
     page: z.coerce.number().optional(),
   }),
 });
 
-function RouteComponent() {
+function characterList() {
   const { page = 1 } = useSearch({ from: "/characterList/" });
   const navigate = useNavigate();
 
@@ -43,15 +43,6 @@ function RouteComponent() {
           <CharacterTable characterDetails={characterDetails?.results} />
           <div className="p-2 flex-row items-center">
             <button
-              disabled={page >= characterDetails?.info?.pages}
-              className="p-5 border border-gray-400 cursor-pointer m-4"
-              onClick={() => {
-                handlePageChange(1);
-              }}
-            >
-              {"Next"}
-            </button>
-            <button
               disabled={page <= 0}
               className="p-5  border border-gray-400 cursor-pointer"
               onClick={() => {
@@ -59,6 +50,15 @@ function RouteComponent() {
               }}
             >
               {"Prev"}
+            </button>
+            <button
+              disabled={page >= characterDetails?.info?.pages}
+              className="p-5 border border-gray-400 cursor-pointer m-4"
+              onClick={() => {
+                handlePageChange(1);
+              }}
+            >
+              {"Next"}
             </button>
           </div>
         </>

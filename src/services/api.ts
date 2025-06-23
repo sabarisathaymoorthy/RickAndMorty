@@ -7,8 +7,9 @@ export const getAllCharacters = async (page: number) => {
   return await response.json();
 };
 
-export const getCharactersDetails = async (id: number = 1) => {
-  return await fetch(`${baseURL}?id=${id}`, {
+export const getCharactersDetails = async (id: string = "1") => {
+  const response = await fetch(`${baseURL}/${id}`, {
     method: "GET",
   });
+  return await response.json();
 };

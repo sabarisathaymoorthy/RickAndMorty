@@ -5,12 +5,14 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import type { characterProps } from "./typings";
+import { useNavigate } from "@tanstack/react-router";
 
 export const CharacterTable = ({
   characterDetails,
 }: {
   characterDetails: characterProps[];
 }) => {
+  const navigate = useNavigate();
   const columnHelper = createColumnHelper<characterProps>();
 
   const columns = [
@@ -53,6 +55,12 @@ export const CharacterTable = ({
 
   const handleCharacterNav = (id: number) => {
     console.log("id", id);
+    navigate({
+      to: "/character/$id",
+      params: {
+        id: id.toString(),
+      },
+    });
   };
 
   return (
