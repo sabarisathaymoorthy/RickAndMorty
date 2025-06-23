@@ -10,7 +10,7 @@ export const CharacterDetails = ({
       <div className="flex flex-row justify-around p-8">
         <img
           src={characterData?.image}
-          alt={characterData?.image}
+          alt={characterData?.name}
           height={400}
           width={400}
         ></img>
